@@ -10,6 +10,9 @@ class AbstractMelonOrder:
     def __init__(self, species, qty):
         self.species = species
         self.qty = qty
+        
+        if qty > 100:
+            raise TooManyMelonsError("No more than 100 melons!")
 
     def get_base_price(self):
         """Return random base price from 5 to 9."""
@@ -84,3 +87,7 @@ class GovernmentMelonOrder(AbstractMelonOrder):
     def mark_inspection(self, passed):
 
         self.passed_inspection = passed
+
+
+class TooManyMelonsError(ValueError):
+    """Raises error if order is for more than 100 melons."""
